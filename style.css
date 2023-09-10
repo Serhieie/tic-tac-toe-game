@@ -1,0 +1,143 @@
+body{
+    background-color: black;
+  
+  }
+  
+  .x-cross-o {
+    display: flex;
+    justify-content: center;
+  }
+  
+  
+  .container {
+    width: 900px;
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    padding: 15px 0px 100px;
+    background-color: white;
+    border-radius: 4px;
+    
+  }
+  
+  .x-game-nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  
+  .result-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .players-text {
+    font-size: 28px;
+    background-color: black;
+    color: white;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 0;
+  }
+  
+  .x-wins-value,
+  .o-wins-value {
+    font-size: 80px;
+  }
+  
+  .content {
+    width: 312px;
+    border: 2px solid black;
+    margin: 0 auto;
+  }
+  
+  .item {
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+    display: inline-block;
+    font-size: 100px;
+    color: black;
+    border: 2px solid black;
+    cursor: pointer;
+    vertical-align: middle;
+    transition: background 300ms ease-in-out, color 300ms ease-in-out;
+    user-select: none;
+  }
+  
+  .item:hover{
+    background-color: #f1f1f10c;
+  }
+  
+  .new-game-btn {
+    width: 180px;
+    height: 52px;
+    border: none;
+    background-color: black;
+    font-size: 18px;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 300ms ease-in-out, color 300ms ease-in-out, border 300ms ease-in-out;
+  }
+  
+  .new-game-btn:hover {
+    background-color: white;
+    border: 2px solid black;
+    color: black;
+  }
+  .winner {
+    font-size: 36px;
+    text-align: center;
+    transform: translateX(-300%);
+    transition: all 300ms ease-in-out;
+  }
+  .winner.finded {
+    transform: translateX(0);
+  }
+  .winning-cell {
+    color:rgb(52, 139, 88);
+  }
+  
+  @media screen and (max-width: 650px) {
+    .container {
+      width: 350px;
+      height: 600px;
+      margin: 100px 20px 10px 20px;
+      padding: 10px 0px 10px;
+    }
+  
+    .winner {
+      font-size: 28px;
+    }
+  
+    .item {
+      font-size: 80px;
+    }
+
+    .result-container {
+      margin: 10px;
+      outline: 2px solid black;
+      border-radius: 4px;
+      padding: 2px;
+      width: 90px;
+    }
+
+    .players-text {
+      font-size: 18px;
+      padding: 5px;
+      text-align: center;
+    }
+    
+    .x-wins-value,
+    .o-wins-value {
+      font-size: 60px;
+    }
+
+    .new-game-btn {
+      width: 90px;
+      height: 100px;
+    }
+  }
