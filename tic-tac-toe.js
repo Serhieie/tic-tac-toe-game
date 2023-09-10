@@ -1,8 +1,14 @@
-const winnerMsg = document.querySelector('.winner');
-const restartBtn = document.querySelector('.js-button');
-const content = document.querySelector('.js-content');
-const valueX = document.querySelector('.x-wins-value')
-const valueO = document.querySelector('.o-wins-value')
+refs = {
+winnerMsg: document.querySelector('.winner'),
+navigation: document.querySelector('.navigation-btns'),
+restartBtn: document.querySelector('.js-button'),
+restartScoreBtn: document.querySelector('.js-button-score'),
+content: document.querySelector('.js-content'),
+valueX: document.querySelector('.x-wins-value'),
+valueO: document.querySelector('.o-wins-value'),
+priviouseWinner: document.querySelector('.priviouse-winner'),
+}
+
 let valueXTextContent = 0;
 let valueOTextContent = 0;
 let player = "X";
@@ -24,11 +30,11 @@ function newGame() {
     for (let i = 1; i < 10; i+=1) {
         markup += `<div class="item js-item" data-id ="${i}"></div>`;
     }
-    content.innerHTML = markup;
+    refs.content.innerHTML = markup;
 };
 newGame();
 
-content.addEventListener("click", onClick);
+refs.content.addEventListener("click", onClick);
 
 function onClick (evt) {
     const {target} = evt;
@@ -50,20 +56,22 @@ function onClick (evt) {
     target.textContent = player;
     const endGame = playerXCombo.length + playerOCombo.length === 9;
     if (result) {
-        winnerMsg.textContent = `THE WINNER IS   > ${player} <`;
+        refs.winnerMsg.textContent = `THE WINNER IS   > ${player} <`;
         if (player === "X") {
-            valueX.textContent = valueXTextContent += 1;
+            refs.valueX.textContent = valueXTextContent += 1;
+            refs.priviouseWinner.textContent = `Winner Was: ${player}`;
         } else if (player === "O") {
-            valueO.textContent = valueOTextContent += 1;
+            refs.valueO.textContent = valueOTextContent += 1;
+            refs.priviouseWinner.textContent = `Winner Was: ${player}`;
         }
-        winnerMsg.classList.add("finded");
-        winnerMsg.classList.add("finded");
-        content.removeEventListener("click", onClick);
+        refs.winnerMsg.classList.add("finded");
+        refs.winnerMsg.classList.add("finded");
+        refs.content.removeEventListener("click", onClick);
         return;
     } else if(endGame) {
-        winnerMsg.textContent = `HERE IS DEAD HEAT TRY AGAIN`;
-        winnerMsg.classList.add("finded");
-        content.removeEventListener("click", onClick);
+        refs.winnerMsg.textContent = `HERE IS DEAD HEAT TRY AGAIN`;
+        refs.winnerMsg.classList.add("finded");
+        refs.content.removeEventListener("click", onClick);
         return;
     }
     player = player === "X" ? "O" : "X";
@@ -74,13 +82,21 @@ function isWinner (arr) {
 };
 
 function restartGame(evt){
-    content.addEventListener("click", onClick);
+    if(evt.target.classList.contains("js-button-score")) {
+        refs.valueX.textContent = 0;
+        refs.valueO.textContent = 0;
+        valueXTextContent = 0;
+        valueOTextContent = 0;
+    } else if (evt.target.classList.contains("js-button")) {    
+    refs.content.addEventListener("click", onClick);
     newGame();
     playerXCombo = [];
     playerOCombo = [];
     player = "X"
-    winnerMsg.textContent = `THE WINNER IS   `;
-    winnerMsg.classList.remove("finded")
+    refs.winnerMsg.textContent = `THE WINNER IS   `;
+    refs.winnerMsg.classList.remove("finded") 
+}
 };
 
-restartBtn.addEventListener( "click", restartGame);
+
+refs.navigation.addEventListener("click", restartGame );
