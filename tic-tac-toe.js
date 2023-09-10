@@ -7,6 +7,7 @@ content: document.querySelector('.js-content'),
 valueX: document.querySelector('.x-wins-value'),
 valueO: document.querySelector('.o-wins-value'),
 priviouseWinner: document.querySelector('.priviouse-winner'),
+yourTurn: document.querySelector('.turn'),
 }
 
 let valueXTextContent = 0;
@@ -41,16 +42,17 @@ function onClick (evt) {
      if(!target.classList.contains("js-item") || target.textContent) {
         return;
     }
-    
     const id = Number(target.dataset.id)
     let result = false;
 
     if (player === "X") {
         playerXCombo.push(id);
         result = isWinner(playerXCombo);
+        refs.yourTurn.textContent = `Player ${player} Made a Move`
     } else {
         playerOCombo.push(id)
         result = isWinner(playerOCombo);
+        refs.yourTurn.textContent = `Player ${player} Made a Move`
     }
     
     target.textContent = player;
@@ -60,6 +62,7 @@ function onClick (evt) {
         if (player === "X") {
             refs.valueX.textContent = valueXTextContent += 1;
             refs.priviouseWinner.textContent = `Winner Was: ${player}`;
+            
         } else if (player === "O") {
             refs.valueO.textContent = valueOTextContent += 1;
             refs.priviouseWinner.textContent = `Winner Was: ${player}`;
@@ -70,6 +73,7 @@ function onClick (evt) {
         return;
     } else if(endGame) {
         refs.winnerMsg.textContent = `HERE IS DEAD HEAT TRY AGAIN`;
+        refs.yourTurn.textContent = `Here Is Dead heat try Again`;
         refs.winnerMsg.classList.add("finded");
         refs.content.removeEventListener("click", onClick);
         return;
@@ -94,7 +98,8 @@ function restartGame(evt){
     playerOCombo = [];
     player = "X"
     refs.winnerMsg.textContent = `THE WINNER IS   `;
-    refs.winnerMsg.classList.remove("finded") 
+    refs.winnerMsg.classList.remove("finded");
+    refs.yourTurn.textContent = `Make Your Choise Player X`
 }
 };
 
