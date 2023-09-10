@@ -40,6 +40,7 @@ function onClick (evt) {
      if(!target.classList.contains("js-item") || target.textContent) {
         return;
     }
+    
     const id = Number(target.dataset.id)
     let result = false;
 
@@ -55,6 +56,7 @@ function onClick (evt) {
     
     target.textContent = player;
     const endGame = playerXCombo.length + playerOCombo.length === 9;
+
     if (result) {
         refs.winnerMsg.textContent = `THE WINNER IS   > ${player} <`;
         refs.yourTurn.textContent = `${player} WINNER ${player} WINNER ${player}`
@@ -66,6 +68,7 @@ function onClick (evt) {
             refs.valueO.textContent = valueOTextContent += 1;
             refs.priviouseWinner.textContent = `Winner Was: ${player}`;
         }
+
         refs.winnerMsg.classList.add("finded");
         refs.winnerMsg.classList.add("finded");
         refs.content.removeEventListener("click", onClick);
@@ -77,6 +80,7 @@ function onClick (evt) {
         refs.content.removeEventListener("click", onClick);
         return;
     }
+
     player = player === "X" ? "O" : "X";
 };
 
