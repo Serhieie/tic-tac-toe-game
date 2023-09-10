@@ -59,6 +59,7 @@ function onClick (evt) {
     const endGame = playerXCombo.length + playerOCombo.length === 9;
     if (result) {
         refs.winnerMsg.textContent = `THE WINNER IS   > ${player} <`;
+        refs.yourTurn.textContent = `${player} WINNER ${player} WINNER ${player}`
         if (player === "X") {
             refs.valueX.textContent = valueXTextContent += 1;
             refs.priviouseWinner.textContent = `Winner Was: ${player}`;
