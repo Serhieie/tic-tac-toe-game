@@ -1,8 +1,6 @@
 refs = {
 winnerMsg: document.querySelector('.winner'),
 navigation: document.querySelector('.navigation-btns'),
-restartBtn: document.querySelector('.js-button'),
-restartScoreBtn: document.querySelector('.js-button-score'),
 content: document.querySelector('.js-content'),
 valueX: document.querySelector('.x-wins-value'),
 valueO: document.querySelector('.o-wins-value'),
@@ -97,10 +95,9 @@ function restartGame(evt){
     newGame();
     playerXCombo = [];
     playerOCombo = [];
-    player = "X"
     refs.winnerMsg.textContent = `THE WINNER IS   `;
     refs.winnerMsg.classList.remove("finded");
-    refs.yourTurn.textContent = `Make Your Choise Player X`
+    refs.yourTurn.textContent = `Make Your Choise Player ${player}`
 }
 };
 
