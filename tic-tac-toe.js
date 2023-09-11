@@ -13,6 +13,7 @@ let valueOTextContent = 0;
 let player = "X";
 let playerXCombo = [];
 let playerOCombo = [];
+let playerWinCombo = [];
 const winnerCombo = [
     [1 ,2, 3],
     [4, 5, 6],
@@ -40,6 +41,7 @@ function onClick (evt) {
      if(!target.classList.contains("js-item") || target.textContent) {
         return;
     }
+
     
     const id = Number(target.dataset.id)
     let result = false;
@@ -56,9 +58,11 @@ function onClick (evt) {
     
     target.textContent = player;
     const endGame = playerXCombo.length + playerOCombo.length === 9;
+    const resultCombo = isWinner(player === "X" ? playerXCombo : playerOCombo);
+
 
     if (result) {
-        refs.winnerMsg.textContent = `THE WINNER IS   > ${player} <`;
+        refs.winnerMsg.textContent = `THE WINNER IS    ${player} `;
         refs.yourTurn.textContent = `${player} WINNER ${player} WINNER ${player}`
         if (player === "X") {
             refs.valueX.textContent = valueXTextContent += 1;
@@ -68,10 +72,13 @@ function onClick (evt) {
             refs.valueO.textContent = valueOTextContent += 1;
             refs.priviouseWinner.textContent = `Winner Was: ${player}`;
         }
-
         refs.winnerMsg.classList.add("finded");
         refs.winnerMsg.classList.add("finded");
         refs.content.removeEventListener("click", onClick);
+        for(const id of resultCombo) {
+            const styleOfItem = document.querySelector(`[data-id="${id}"]`);
+            styleOfItem.classList.add('winning-square');
+        }
         return;
     } else if(endGame) {
         refs.winnerMsg.textContent = `HERE IS DEAD HEAT TRY AGAIN`;
@@ -85,8 +92,15 @@ function onClick (evt) {
 };
 
 function isWinner (arr) {
-    return winnerCombo.some((item) => item.every(id => arr.includes(id)));
+    // return winnerCombo.some((item) => item.every(id => arr.includes(id)));
+    for (const combo of winnerCombo) {
+        if (combo.every(id => arr.includes(id))) {
+            return combo;
+        } 
+    }
+    return null; 
 };
+
 
 function restartGame(evt){
     if(evt.target.classList.contains("js-button-score")) {
@@ -94,6 +108,8 @@ function restartGame(evt){
         refs.valueO.textContent = 0;
         valueXTextContent = 0;
         valueOTextContent = 0;
+        player = "X"
+        refs.yourTurn.textContent = `Make Your Choise Player ${player}`
     } else if (evt.target.classList.contains("js-button")) {    
     refs.content.addEventListener("click", onClick);
     newGame();

@@ -63,7 +63,7 @@ body{
     border: 2px solid black;
     cursor: pointer;
     vertical-align: middle;
-    transition: background 300ms ease-in-out, color 300ms ease-in-out;
+    transition: background 300ms ease-in-out, color 300ms ease-in-out, font-size 300ms ease-in-out;
     user-select: none;
   }
   
@@ -104,8 +104,9 @@ body{
   .winner.finded {
     transform: translateX(0);
   }
-  .winning-cell {
+  .js-item.winning-square {
     color:rgb(52, 139, 88);
+    font-size: 110px;
   }
   .turn{
     text-align: center;
@@ -140,6 +141,10 @@ body{
   
     .item {
       font-size: 80px;
+    }
+
+    .js-item.winning-square {
+      font-size: 90px;
     }
 
     .result-container {
